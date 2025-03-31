@@ -8,6 +8,7 @@ const crypto = require('crypto')
 const RefreshToken = require('../models/RefreshToken')
 const {generateTokens} = require('../utils/tokenUtils')
 const auth = require('../middleware/auth')
+const redisClient = require('../redis/redisClient')
 
 const router = express.Router();
 
@@ -64,25 +65,49 @@ router.post(
 }
 	const  { email, password } = req.body;
 
-	try {
-	const user = await User.findOne({email})
-	if (!user){
-		return res.status(400).send('This email does not  exist')
-}
-	isMatch = await bcrypt.compare(password, user.password)
-	if (!isMatch){
-		return res.status(400).json({errors : [{ msg : 'Incorrect password'}] })
-}
-	console.log(user)
-	const { accessToken, refreshToken } = await generateTokens(user._id)
-	console.log('accessToken:', accessToken)
-	console.log('refreshToken:', refreshToken)
-	return res.status(200).json({accessToken, refreshToken});
-}
-	catch (err){
-                console.error(err)
-		console.error(err.message)
-                res.status(500).json({error : 'server error:', err})
+	try{
+		const cacheKey = `user:login:cache:${email}`
+
+		const cachedUserData = await redisClient.get(cacheKey)
+		let user = null 
+		if (cachedUserData) {
+			user = JSON.parse(cachedUserData)
+			console.log('From redis:', user)
+		}	else {
+				user = await User.findOne({email}).select('+password')
+				
+		if (!user){
+			return res.status(400).send('This email does not  exist')
+		}}	
+		console.log('From MongoDB:', user)
+
+		if (!user.password){
+			console.error('User password is missing:,', user)
+			return res.status(500).json({error: 'Invalid user data'})
+		}
+
+		const userIdForToken = user._id ? user._id : user.userId
+
+		if (!cachedUserData && user._id) {
+			const userDataToCache = {
+				userId : user._id.toString(),
+				name : user.username,
+				email : user.email,
+				password: user.password
+					}
+				
+			await redisClient.set(cacheKey, JSON.stringify(userDataToCache),'EX',300)
+		}	
+				
+		const isMatch = await bcrypt.compare(password, user.password)
+		if (!isMatch){
+			return res.status(400).json({errors : [{ msg : 'Incorrect password'}] })
+			}
+		const { accessToken, refreshToken } = await generateTokens(userIdForToken)
+		return res.status(200).json({accessToken, refreshToken});			
+}	catch (err){
+		console.error(err)
+		return res.status(500).json({error: 'Internal server error', err})		
 }})
 
 
