@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 const config = require('config')
 const crypto = require('crypto')
 const RefreshToken = require('../models/RefreshToken')
-const {generateTokens} = require('../utils/tokenUtils')
+const {verifyTokenAndCheckBlackList, generateTokens} = require('../utils/tokenUtils')
 const auth = require('../middleware/auth')
 const redisClient = require('../redis/redisClient')
 
@@ -142,17 +142,47 @@ router.post(
 	async (req, res) => {
 	const errors = validationResult(req)
 	if (!errors.isEmpty()){
-	return res.status(400).json({error : 'Requires a token'})
+	return res.status(400).json({errors : errors.array() })
 }	try{
 	const {token} = req.body
-	const verified = jwt.verify(token, config.get('jwtSecret'))
-	const user = verified.user
+	const payload = await verifyTokenAndCheckBlackList(token)
+	const user = payload.user
 	return res.status(200).json({userId : user.id  })
 }	catch (err){
-	return res.status(401).json({error: 'Invalid token'})
+	console.error(err)
+	return res.status(401).json({error: 'Invalid token', })
 }})
 
 
+router.post(
+	'/logout',
+	auth,
+	async (req,res) => {
+		const authHeader = req.header('Authorization')
+		const token = authHeader.split(' ')[1]		
+		try{
+			const decoded = jwt.decode(token)
+			if (!decoded || !decoded.exp){
+				return res.status(400).json({error : 'Cannot decode token or find exp claim'})
+			}
+			const tokenId = decoded.jti || token
+			const expirationTimestamp = decoded.exp
+			const nowInSeconds = Math.floor(Date.now()/1000)
+			const ttlSeconds = expirationTimestamp - nowInSeconds
+
+			if (ttlSeconds > 0){
+				const redisKey = `blacklist:${tokenId}`
+				const value = 1
+
+				await redisClient.set(redisKey, 1, {EX : ttlSeconds})
+
+				return res.status(204).send()
+		}
+		}catch (err){
+			return res.status(500).json({error: 'Internal server error during logout'})
+				}
+		}
+)
 
 
 module.exports = router;
