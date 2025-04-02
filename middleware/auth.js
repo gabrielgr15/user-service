@@ -1,4 +1,5 @@
 const {verifyTokenAndCheckBlackList} = require('../utils/tokenUtils')
+const logger = require('../logger')
 
 module.exports = async function(req, res, next){
 
@@ -16,6 +17,6 @@ module.exports = async function(req, res, next){
 		req.user = payload.user;
 		next(); 
 }	catch (err){
-		console.error(err)
+		logger.error(err)
 		res.status(401).json({msg: 'Token is not valid'})
 }}

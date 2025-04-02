@@ -4,6 +4,7 @@ const config = require('config')
 const jwt = require('jsonwebtoken')
 const User = require('../models/User')
 const redisClient = require('../redis/redisClient')
+const logger = require('../logger')
 
 async function generateTokens(userId){
 try{
@@ -34,28 +35,25 @@ try{
         user : user,
         expiresAt : refreshTokenExpiresAt,
 })
-	console.log('refreshToken object:', refreshToken)
+	
         await refreshToken.save()
-	.then(savedToken => {
-	console.log('RefreshToken saved succesfully:', savedToken)
-})
 	.catch(err => {
-	console.error('Error saving RefreshToken', err)
+	logger.error('Error saving RefreshToken', err)
 	throw err
 })
 	return {accessToken, refreshToken : refreshToken.token}
+
 }	catch(err){
-	console.error('Error generating tokens: ', err)
-	console.error('Full error object:', err)
+	logger.error('Error generating tokens: ', err)
 	throw err
 }}
 
 async function verifyTokenAndCheckBlackList(token){
         try{
-                console.log("DEBUG: Pinging redis before verify... ")
+                logger.info("DEBUG: Pinging redis before verify... ")
                 const pingResult = await redisClient.ping()
-                console.log("DEBUG: Redis ping result:", pingResult)
-                console.log("DEBUG: Token being passed to jwt.verify:", token)   
+                logger.info("DEBUG: Redis ping result:", pingResult)
+                  
         const decoded = jwt.verify(token, config.get('jwtSecret'))
         const tokenId = decoded.jti || token
         const redisKey = `blacklist:${tokenId}`
@@ -63,11 +61,11 @@ async function verifyTokenAndCheckBlackList(token){
         if (check === 0) {
                 return decoded
         }else{
-                console.error('Token blacklisted')
+                logger.info('Token blacklisted')
                 throw new Error('Token has been logged out')
         }
         }catch(error) {
-                console.error('<<<<<<<<<<<<<<<<<<< CAUGHT ERROR HERE >>>>>>>>>>>>>>>>>:', error); // Make it super visible
+                logger.error('<<<<<<<<<<<<<<<<<<< CAUGHT ERROR HERE >>>>>>>>>>>>>>>>>:', error); 
                 throw new Error('Invalid token1');
             }
               

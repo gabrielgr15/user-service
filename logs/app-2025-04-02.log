@@ -1,0 +1,214 @@
+2025-04-02 14:34:22 [INFO]: Server is running on http://localhost:5000 
+2025-04-02 14:34:22 [INFO]: Connected to Redis successfully! 
+2025-04-02 14:34:23 [INFO]: MongoDB connected succesfully 
+2025-04-02 14:36:18 [INFO]: DEBUG: Pinging redis before verify...  
+2025-04-02 14:36:18 [INFO]: DEBUG: Redis ping result: 
+2025-04-02 14:37:07 [INFO]: DEBUG: Pinging redis before verify...  
+2025-04-02 14:37:07 [INFO]: DEBUG: Redis ping result: 
+2025-04-02 14:37:30 [INFO]: DEBUG: Pinging redis before verify...  
+2025-04-02 14:37:30 [INFO]: DEBUG: Redis ping result: 
+2025-04-02 14:58:42 [INFO]: Server is running on http://localhost:5000
+2025-04-02 14:58:42 [INFO]: Connected to Redis successfully!
+2025-04-02 14:58:43 [INFO]: MongoDB connected succesfully
+2025-04-02 14:59:22 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 14:59:22 [INFO]: DEBUG: Redis ping result:
+2025-04-02 14:59:22 [INFO]: Token blacklisted
+2025-04-02 14:59:22 [ERROR]: <<<<<<<<<<<<<<<<<<< CAUGHT ERROR HERE >>>>>>>>>>>>>>>>>: Token has been logged out
+Error: Token has been logged out
+    at verifyTokenAndCheckBlackList (/home/gabriel/projects/user-service/utils/tokenUtils.js:65:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async module.exports (/home/gabriel/projects/user-service/middleware/auth.js:16:19)
+2025-04-02 14:59:22 [ERROR]: Invalid token1
+Error: Invalid token1
+    at verifyTokenAndCheckBlackList (/home/gabriel/projects/user-service/utils/tokenUtils.js:69:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async module.exports (/home/gabriel/projects/user-service/middleware/auth.js:16:19)
+2025-04-02 14:59:53 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 14:59:53 [INFO]: DEBUG: Redis ping result:
+2025-04-02 14:59:56 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 14:59:56 [INFO]: DEBUG: Redis ping result:
+2025-04-02 15:00:42 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:00:42 [INFO]: DEBUG: Redis ping result:
+2025-04-02 15:00:43 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:00:43 [INFO]: DEBUG: Redis ping result:
+2025-04-02 15:00:44 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:00:44 [INFO]: DEBUG: Redis ping result:
+2025-04-02 15:01:29 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:01:29 [INFO]: DEBUG: Redis ping result:
+2025-04-02 15:11:56 [INFO]: Server is running on http://localhost:5000
+2025-04-02 15:11:56 [INFO]: Connected to Redis successfully!
+2025-04-02 15:11:58 [INFO]: MongoDB connected succesfully
+2025-04-02 15:12:16 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:12:16 [INFO]: DEBUG: Redis ping result:
+2025-04-02 15:12:16 [INFO]: Token blacklisted
+2025-04-02 15:12:16 [ERROR]: <<<<<<<<<<<<<<<<<<< CAUGHT ERROR HERE >>>>>>>>>>>>>>>>>: Token has been logged out
+Error: Token has been logged out
+    at verifyTokenAndCheckBlackList (/home/gabriel/projects/user-service/utils/tokenUtils.js:66:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async module.exports (/home/gabriel/projects/user-service/middleware/auth.js:16:19)
+2025-04-02 15:12:16 [ERROR]: Invalid token1
+Error: Invalid token1
+    at verifyTokenAndCheckBlackList (/home/gabriel/projects/user-service/utils/tokenUtils.js:70:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async module.exports (/home/gabriel/projects/user-service/middleware/auth.js:16:19)
+2025-04-02 15:12:42 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:12:42 [INFO]: DEBUG: Redis ping result:
+2025-04-02 15:12:45 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:12:45 [INFO]: DEBUG: Redis ping result:
+{
+  "message": "Server is running on http://localhost:5000",
+  "level": "info",
+  "timestamp": "2025-04-02 15:17:00"
+}
+{
+  "message": "Connected to Redis successfully!",
+  "level": "info",
+  "timestamp": "2025-04-02 15:17:00"
+}
+{
+  "message": "MongoDB connected succesfully",
+  "level": "info",
+  "timestamp": "2025-04-02 15:17:01"
+}
+{
+  "message": "DEBUG: Pinging redis before verify... ",
+  "level": "info",
+  "timestamp": "2025-04-02 15:17:21"
+}
+{
+  "level": "info",
+  "message": "DEBUG: Redis ping result:",
+  "timestamp": "2025-04-02 15:17:21"
+}
+{
+  "message": "DEBUG: Pinging redis before verify... ",
+  "level": "info",
+  "timestamp": "2025-04-02 15:17:48"
+}
+{
+  "level": "info",
+  "message": "DEBUG: Redis ping result:",
+  "timestamp": "2025-04-02 15:17:48"
+}
+{
+  "message": "DEBUG: Pinging redis before verify... ",
+  "level": "info",
+  "timestamp": "2025-04-02 15:17:49"
+}
+{
+  "level": "info",
+  "message": "DEBUG: Redis ping result:",
+  "timestamp": "2025-04-02 15:17:49"
+}
+2025-04-02 15:23:15 [INFO]: Server is running on http://localhost:5000
+2025-04-02 15:23:15 [INFO]: Connected to Redis successfully!
+2025-04-02 15:23:16 [INFO]: MongoDB connected succesfully
+2025-04-02 15:23:39 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:23:39 [INFO]: DEBUG: Redis ping result: PONG
+2025-04-02 15:23:40 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:23:40 [INFO]: DEBUG: Redis ping result: PONG
+2025-04-02 15:30:13 [INFO]: Server is running on http://localhost:5000
+2025-04-02 15:30:14 [INFO]: Connected to Redis successfully!
+2025-04-02 15:30:14 [INFO]: MongoDB connected succesfully
+2025-04-02 15:30:24 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:30:24 [INFO]: DEBUG: Redis ping result: PONG
+2025-04-02 15:30:25 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:30:25 [INFO]: DEBUG: Redis ping result: PONG
+2025-04-02 15:30:26 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:30:26 [INFO]: DEBUG: Redis ping result: PONG
+2025-04-02 15:31:48 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:31:48 [INFO]: DEBUG: Redis ping result: PONG
+2025-04-02 15:34:50 [[32MINFO[39M]: Server is running on http://localhost:5000
+2025-04-02 15:34:50 [[32MINFO[39M]: Connected to Redis successfully!
+2025-04-02 15:34:51 [[32MINFO[39M]: MongoDB connected succesfully
+2025-04-02 15:35:20 [[32MINFO[39M]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:35:20 [[32MINFO[39M]: DEBUG: Redis ping result: PONG
+2025-04-02 15:35:20 [[32MINFO[39M]: Token blacklisted
+2025-04-02 15:35:20 [[31MERROR[39M]: <<<<<<<<<<<<<<<<<<< CAUGHT ERROR HERE >>>>>>>>>>>>>>>>>: Token has been logged out Error: Token has been logged out
+Error: Token has been logged out
+    at verifyTokenAndCheckBlackList (/home/gabriel/projects/user-service/utils/tokenUtils.js:65:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async module.exports (/home/gabriel/projects/user-service/middleware/auth.js:16:19)
+2025-04-02 15:35:20 [[31MERROR[39M]: Invalid token1
+Error: Invalid token1
+    at verifyTokenAndCheckBlackList (/home/gabriel/projects/user-service/utils/tokenUtils.js:69:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async module.exports (/home/gabriel/projects/user-service/middleware/auth.js:16:19)
+2025-04-02 15:36:09 [[32MINFO[39M]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:36:09 [[32MINFO[39M]: DEBUG: Redis ping result: PONG
+2025-04-02 15:36:11 [[32MINFO[39M]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:36:11 [[32MINFO[39M]: DEBUG: Redis ping result: PONG
+2025-04-02 15:36:12 [[32MINFO[39M]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:36:12 [[32MINFO[39M]: DEBUG: Redis ping result: PONG
+2025-04-02 15:36:17 [[32MINFO[39M]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:36:17 [[32MINFO[39M]: DEBUG: Redis ping result: PONG
+2025-04-02 15:37:38 [INFO]: Server is running on http://localhost:5000
+2025-04-02 15:37:38 [INFO]: Connected to Redis successfully!
+2025-04-02 15:37:39 [INFO]: MongoDB connected succesfully
+2025-04-02 15:37:47 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:37:47 [INFO]: DEBUG: Redis ping result: PONG
+2025-04-02 15:37:48 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:37:48 [INFO]: DEBUG: Redis ping result: PONG
+2025-04-02 15:37:49 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 15:37:49 [INFO]: DEBUG: Redis ping result: PONG
+2025-04-02 17:32:26 [INFO]: Server is running on http://localhost:5000
+2025-04-02 17:32:26 [INFO]: Connected to Redis successfully!
+2025-04-02 17:32:27 [INFO]: MongoDB connected succesfully
+2025-04-02 17:33:06 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 17:33:06 [INFO]: DEBUG: Redis ping result: PONG
+2025-04-02 17:33:07 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 17:33:07 [INFO]: DEBUG: Redis ping result: PONG
+2025-04-02 17:34:20 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 17:34:20 [INFO]: DEBUG: Redis ping result: PONG
+2025-04-02 17:34:25 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 17:34:25 [INFO]: DEBUG: Redis ping result: PONG
+2025-04-02 17:34:25 [INFO]: Token blacklisted
+2025-04-02 17:34:25 [ERROR]: <<<<<<<<<<<<<<<<<<< CAUGHT ERROR HERE >>>>>>>>>>>>>>>>>: Token has been logged out {}
+Error: Token has been logged out
+    at verifyTokenAndCheckBlackList (/home/gabriel/projects/user-service/utils/tokenUtils.js:65:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async module.exports (/home/gabriel/projects/user-service/middleware/auth.js:16:19)
+2025-04-02 17:34:25 [ERROR]: Invalid token1
+Error: Invalid token1
+    at verifyTokenAndCheckBlackList (/home/gabriel/projects/user-service/utils/tokenUtils.js:69:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async module.exports (/home/gabriel/projects/user-service/middleware/auth.js:16:19)
+2025-04-02 17:34:31 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 17:34:31 [INFO]: DEBUG: Redis ping result: PONG
+2025-04-02 17:34:31 [INFO]: Token blacklisted
+2025-04-02 17:34:31 [ERROR]: <<<<<<<<<<<<<<<<<<< CAUGHT ERROR HERE >>>>>>>>>>>>>>>>>: Token has been logged out {}
+Error: Token has been logged out
+    at verifyTokenAndCheckBlackList (/home/gabriel/projects/user-service/utils/tokenUtils.js:65:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async module.exports (/home/gabriel/projects/user-service/middleware/auth.js:16:19)
+2025-04-02 17:34:31 [ERROR]: Invalid token1
+Error: Invalid token1
+    at verifyTokenAndCheckBlackList (/home/gabriel/projects/user-service/utils/tokenUtils.js:69:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async module.exports (/home/gabriel/projects/user-service/middleware/auth.js:16:19)
+2025-04-02 17:34:32 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 17:34:32 [INFO]: DEBUG: Redis ping result: PONG
+2025-04-02 17:34:32 [INFO]: Token blacklisted
+2025-04-02 17:34:32 [ERROR]: <<<<<<<<<<<<<<<<<<< CAUGHT ERROR HERE >>>>>>>>>>>>>>>>>: Token has been logged out {}
+Error: Token has been logged out
+    at verifyTokenAndCheckBlackList (/home/gabriel/projects/user-service/utils/tokenUtils.js:65:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async module.exports (/home/gabriel/projects/user-service/middleware/auth.js:16:19)
+2025-04-02 17:34:32 [ERROR]: Invalid token1
+Error: Invalid token1
+    at verifyTokenAndCheckBlackList (/home/gabriel/projects/user-service/utils/tokenUtils.js:69:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async module.exports (/home/gabriel/projects/user-service/middleware/auth.js:16:19)
+2025-04-02 17:34:33 [INFO]: DEBUG: Pinging redis before verify... 
+2025-04-02 17:34:33 [INFO]: DEBUG: Redis ping result: PONG
+2025-04-02 17:34:33 [INFO]: Token blacklisted
+2025-04-02 17:34:33 [ERROR]: <<<<<<<<<<<<<<<<<<< CAUGHT ERROR HERE >>>>>>>>>>>>>>>>>: Token has been logged out {}
+Error: Token has been logged out
+    at verifyTokenAndCheckBlackList (/home/gabriel/projects/user-service/utils/tokenUtils.js:65:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async module.exports (/home/gabriel/projects/user-service/middleware/auth.js:16:19)
+2025-04-02 17:34:33 [ERROR]: Invalid token1
+Error: Invalid token1
+    at verifyTokenAndCheckBlackList (/home/gabriel/projects/user-service/utils/tokenUtils.js:69:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async module.exports (/home/gabriel/projects/user-service/middleware/auth.js:16:19)

@@ -1,4 +1,5 @@
 const redis = require('redis');
+const logger = require('../logger')
 
 const redisClient = redis.createClient({
     url: 'redis://localhost:6379' 
@@ -6,11 +7,11 @@ const redisClient = redis.createClient({
 
 (async () => {
     try {
-        redisClient.on('error', (err) => console.error('Redis Client Error:', err));
+        redisClient.on('error', (err) => logger.error('Redis Client Error:', err));
         await redisClient.connect();
-        console.log('Connected to Redis successfully!');
+        logger.info('Connected to Redis successfully!');
     } catch (error) {
-        console.error('Failed to connect to Redis:', error);
+        logger.error('Failed to connect to Redis:', error);
     }
 })();
 

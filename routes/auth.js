@@ -3,12 +3,11 @@ const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken')
-const config = require('config')
-const crypto = require('crypto')
 const RefreshToken = require('../models/RefreshToken')
 const {verifyTokenAndCheckBlackList, generateTokens} = require('../utils/tokenUtils')
 const auth = require('../middleware/auth')
 const redisClient = require('../redis/redisClient')
+const logger = require('../logger')
 
 const router = express.Router();
 
@@ -43,10 +42,9 @@ router.post(
         await user.save();
 	const { accessToken, refreshToken } = await generateTokens(user)
 	return res.status(201).json({accessToken, refreshToken })
-}
-	catch (err) {
-	console.error(err);
-      	res.status(500).send('Server error');
+}	catch (err) {
+		logger.error(err);
+    	res.status(500).send('Server error');
 }
 })
 
@@ -71,18 +69,16 @@ router.post(
 		const cachedUserData = await redisClient.get(cacheKey)
 		let user = null 
 		if (cachedUserData) {
-			user = JSON.parse(cachedUserData)
-			console.log('From redis:', user)
+			user = JSON.parse(cachedUserData)			
 		}	else {
 				user = await User.findOne({email}).select('+password')
 				
 		if (!user){
 			return res.status(400).send('This email does not  exist')
 		}}	
-		console.log('From MongoDB:', user)
-
+		
 		if (!user.password){
-			console.error('User password is missing:,', user)
+			logger.error('User password is missing:,', user)
 			return res.status(500).json({error: 'Invalid user data'})
 		}
 
@@ -106,7 +102,7 @@ router.post(
 		const { accessToken, refreshToken } = await generateTokens(userIdForToken)
 		return res.status(200).json({accessToken, refreshToken});			
 }	catch (err){
-		console.error(err)
+		logger.error(err)
 		return res.status(500).json({error: 'Internal server error', err})		
 }})
 
@@ -149,7 +145,7 @@ router.post(
 	const user = payload.user
 	return res.status(200).json({userId : user.id  })
 }	catch (err){
-	console.error(err)
+	logger.error(err)
 	return res.status(401).json({error: 'Invalid token', })
 }})
 
