@@ -1,22 +1,24 @@
-const {verifyTokenAndCheckBlackList} = require('../utils/tokenUtils')
+const { verifyTokenAndCheckBlackList } = require('../utils/tokenUtils')
+const { AuthError, CustomError, ServerError } = require('../errors')
 const logger = require('../logger')
 
-module.exports = async function(req, res, next){
-
-	if (req.path === '/refresh' || req.path === '/refresh/'){
-		return next()
-}
-	const authHeader = req.header('Authorization');
-	
-	if (!authHeader){
-		return res.status(401).json({msg: 'No token, authorization denied'})
-}
-	try{
+module.exports = async function (req, res, next) {
+	const authHeader = req.header('Authorization')
+	if (!authHeader || !authHeader.startsWith('Bearer ')) {
+		throw new AuthError('No authorization token, access denied')
+	}
+	try {
 		const token = authHeader.split(' ')[1]
-		const payload = await verifyTokenAndCheckBlackList(token)
-		req.user = payload.user;
-		next(); 
-}	catch (err){
-		logger.error(err)
-		res.status(401).json({msg: 'Token is not valid'})
-}}
+		if (!token) throw new AuthError('Token missing from header')
+		const decoded = await verifyTokenAndCheckBlackList(token)
+		req.user = decoded.user
+		req.token = decoded.jti
+		req.tokenExpiry = decoded.exp
+		next();
+	} catch (error) {
+		if(error instanceof CustomError){
+			throw error
+		}
+		throw new ServerError('An internal server error occurred', {cause: error})
+	}	
+}

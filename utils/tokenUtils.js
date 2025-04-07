@@ -1,74 +1,73 @@
-const RefreshToken = require('../models/RefreshToken')
-const crypto = require('crypto')
 const config = require('config')
 const jwt = require('jsonwebtoken')
 const User = require('../models/User')
 const redisClient = require('../redis/redisClient')
 const logger = require('../logger')
+const { generateAccessToken, generateRefreshToken } = require('./authHelpers')
+const { ServerError, CustomError, AuthError } = require('../errors')
 
-async function generateTokens(userId){
-try{
-	const user = await User.findById(userId)
-	const payload = {
-                user:{
-                id: user.id
-}}
-	const accessToken = await new Promise((resolve, reject) =>{
-        jwt.sign(
-        payload,
-        config.get('jwtSecret'),
-        {expiresIn: '1h'},
-        (err, token) => {
-        if (err){
-	reject(err)
-}
-	resolve(token)
-})})
-	const newToken = crypto.randomBytes(64).toString('hex')
-
-        const refreshTokenLifespanDays = 7;
-        const refreshTokenLifespanMilliseconds = refreshTokenLifespanDays * 24 * 60 * 60 * 1000;
-        const refreshTokenExpiresAt = new Date(Date.now() + refreshTokenLifespanMilliseconds);
-
-        let refreshToken = new RefreshToken ({
-        token : newToken,
-        user : user,
-        expiresAt : refreshTokenExpiresAt,
-})
-	
-        await refreshToken.save()
-	.catch(err => {
-	logger.error('Error saving RefreshToken', err)
-	throw err
-})
-	return {accessToken, refreshToken : refreshToken.token}
-
-}	catch(err){
-	logger.error('Error generating tokens: ', err)
-	throw err
-}}
-
-async function verifyTokenAndCheckBlackList(token){
-        try{
-                logger.info("DEBUG: Pinging redis before verify... ")
-                const pingResult = await redisClient.ping()
-                logger.info("DEBUG: Redis ping result:", pingResult)
-                  
-        const decoded = jwt.verify(token, config.get('jwtSecret'))
-        const tokenId = decoded.jti || token
-        const redisKey = `blacklist:${tokenId}`
-        const check = await redisClient.exists(redisKey)
-        if (check === 0) {
-                return decoded
-        }else{
-                logger.info('Token blacklisted')
-                throw new Error('Token has been logged out')
+async function generateTokens(userId) {
+    if (!userId) {
+        logger.error('Invalid arguments passed to generateTokens', {userId})
+        throw new ServerError('Invalid argument for tokens generation')
+    }
+    try {        
+        const user = await User.findOne({ _id: userId })       
+        if (!user) {
+            logger.error('User record not found for token generation', {userId})
+            throw new ServerError('User record not found for token generation')
         }
-        }catch(error) {
-                logger.error('<<<<<<<<<<<<<<<<<<< CAUGHT ERROR HERE >>>>>>>>>>>>>>>>>:', error); 
-                throw new Error('Invalid token1');
-            }
-              
+        const accessToken = await generateAccessToken(userId)
+        const refreshToken = await generateRefreshToken(user)
+        await refreshToken.save()        
+        return { accessToken, refreshToken: refreshToken.token }
+    } catch (error) {
+        if (error instanceof CustomError) {
+            throw error
+        }
+        throw new ServerError('An internal server error occurred', {cause: error})
+    }
 }
 
-module.exports = {verifyTokenAndCheckBlackList, generateTokens}
+
+async function verifyTokenAndCheckBlacklist(token) {
+    if(!token) {
+        logger.error('Invalid arguments passed to verifyTokenAndCheckBlacklist', {token})
+        throw new ServerError('invalid argument for token verification')
+    }
+    try {
+        const decoded = jwt.verify(token, config.get('jwtSecret'));
+        // Check jti presence since blacklist relies on it, data integrity matters.
+        if (!decoded.jti) {
+            logger.warn('Token missing jti', { token });
+            throw new AuthError('Invalid token structure');
+        }
+        // Could split blacklist check for modularity, but kept cohesive here.
+        const isBlacklisted = await redisClient.exists(`blacklist:${decoded.jti}`);
+        if (isBlacklisted) throw new AuthError('Token is blacklisted');
+        return decoded;
+    } catch (error) {
+        // Map JWT failures to AuthError for semantic clarity.
+        if (error instanceof jwt.TokenExpiredError || error instanceof jwt.JsonWebTokenError) {
+            throw new AuthError('Invalid token');
+        }
+        if (error instanceof CustomError) {
+            throw error
+        }        
+        throw new ServerError('An internal server error occurred', {cause: error}) 
+    }
+}
+
+function generateBlacklistData(tokenId, expirationTimestamp) {
+    if(!tokenId || typeof expirationTimestamp !== 'number'){
+        logger.error('Invalid arguments passed to generateBlacklistData', {tokenId, expirationTimestamp})
+        throw new ServerError('Invalid arguments for blacklist data generation')
+    }
+    const nowInSeconds = Math.floor(Date.now() / 1000)
+    const ttlSeconds = expirationTimestamp - nowInSeconds
+    const redisKey = `blacklist:${tokenId}`
+    const value = 1
+    return { redisKey, value, ttlSeconds }
+}
+
+module.exports = { verifyTokenAndCheckBlacklist, generateTokens, generateBlacklistData }

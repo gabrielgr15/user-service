@@ -1,0 +1,47 @@
+2025-04-03 13:23:45 [INFO]: Server is running on http://localhost:5000
+2025-04-03 13:23:45 [INFO]: Connected to Redis successfully!
+2025-04-03 13:23:46 [INFO]: MongoDB connected succesfully
+2025-04-03 13:24:03 [ERROR]: Error generating tokens:  Cannot read properties of null (reading '_id') {}
+TypeError: Cannot read properties of null (reading '_id')
+    at generateTokens (/home/gabriel/projects/user-service/utils/tokenUtils.js:14:26)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/gabriel/projects/user-service/routes/auth.js:91:42
+2025-04-03 13:32:05 [INFO]: Server is running on http://localhost:5000
+2025-04-03 13:32:06 [INFO]: Connected to Redis successfully!
+2025-04-03 13:32:07 [INFO]: MongoDB connected succesfully
+2025-04-03 13:32:12 [INFO]: Found user: null
+2025-04-03 13:33:50 [INFO]: Server is running on http://localhost:5000
+2025-04-03 13:33:50 [INFO]: Connected to Redis successfully!
+2025-04-03 13:33:51 [INFO]: MongoDB connected succesfully
+2025-04-03 13:33:53 [INFO]: Found user: null
+2025-04-03 13:39:00 [INFO]: Server is running on http://localhost:5000
+2025-04-03 13:39:00 [INFO]: Connected to Redis successfully!
+2025-04-03 13:39:01 [INFO]: MongoDB connected succesfully
+2025-04-03 13:39:05 [INFO]: Found user: {"_id":"67edfc1684df802c506321fe","username":"Justatest4","email":"justatest4@gmail.com","password":"$2b$10$VwTC6Xsho/xWAkAhLIOzAuzCmkj8wXtvfrKfmNKso10OQHgITMdBi","createdAt":"2025-04-03T03:10:14.292Z","updatedAt":"2025-04-03T03:10:14.292Z","__v":0}
+2025-04-03 13:39:05 [INFO]: Found user: null
+2025-04-03 13:41:14 [INFO]: Server is running on http://localhost:5000
+2025-04-03 13:41:14 [INFO]: Connected to Redis successfully!
+2025-04-03 13:41:15 [INFO]: MongoDB connected succesfully
+2025-04-03 13:41:17 [INFO]: Found user: {"_id":"67edfc1684df802c506321fe","username":"Justatest4","email":"justatest4@gmail.com","password":"$2b$10$VwTC6Xsho/xWAkAhLIOzAuzCmkj8wXtvfrKfmNKso10OQHgITMdBi","createdAt":"2025-04-03T03:10:14.292Z","updatedAt":"2025-04-03T03:10:14.292Z","__v":0}
+2025-04-03 13:41:17 [INFO]: user_if found: "67edfc1684df802c506321fe"
+2025-04-03 13:41:17 [INFO]: Found user2: null
+2025-04-03 13:45:24 [INFO]: Server is running on http://localhost:5000
+2025-04-03 13:45:24 [INFO]: Connected to Redis successfully!
+2025-04-03 13:45:25 [INFO]: MongoDB connected succesfully
+2025-04-03 13:45:27 [INFO]: Found user: {"_id":"67edfc1684df802c506321fe","username":"Justatest4","email":"justatest4@gmail.com","password":"$2b$10$VwTC6Xsho/xWAkAhLIOzAuzCmkj8wXtvfrKfmNKso10OQHgITMdBi","createdAt":"2025-04-03T03:10:14.292Z","updatedAt":"2025-04-03T03:10:14.292Z","__v":0}
+2025-04-03 13:45:27 [INFO]: user_id found: "67edfc1684df802c506321fe"
+2025-04-03 13:45:27 [INFO]: Found user2: null
+2025-04-03 13:50:27 [INFO]: Server is running on http://localhost:5000
+2025-04-03 13:50:27 [INFO]: Connected to Redis successfully!
+2025-04-03 13:50:29 [INFO]: MongoDB connected succesfully
+2025-04-03 13:50:35 [INFO]: Found user: {"_id":"67edfc1684df802c506321fe","username":"Justatest4","email":"justatest4@gmail.com","password":"$2b$10$VwTC6Xsho/xWAkAhLIOzAuzCmkj8wXtvfrKfmNKso10OQHgITMdBi","createdAt":"2025-04-03T03:10:14.292Z","updatedAt":"2025-04-03T03:10:14.292Z","__v":0}
+2025-04-03 13:50:35 [INFO]: user_id found: "67edfc1684df802c506321fe"
+2025-04-03 13:50:35 [INFO]: Found user2: {"_id":"67edfc1684df802c506321fe","username":"Justatest4","email":"justatest4@gmail.com","password":"$2b$10$VwTC6Xsho/xWAkAhLIOzAuzCmkj8wXtvfrKfmNKso10OQHgITMdBi","createdAt":"2025-04-03T03:10:14.292Z","updatedAt":"2025-04-03T03:10:14.292Z","__v":0}
+2025-04-03 13:52:23 [INFO]: Found user: {"_id":"67edfc1684df802c506321fe","username":"Justatest4","email":"justatest4@gmail.com","password":"$2b$10$VwTC6Xsho/xWAkAhLIOzAuzCmkj8wXtvfrKfmNKso10OQHgITMdBi","createdAt":"2025-04-03T03:10:14.292Z","updatedAt":"2025-04-03T03:10:14.292Z","__v":0}
+2025-04-03 13:52:23 [INFO]: user_id found: "67edfc1684df802c506321fe"
+2025-04-03 13:52:23 [INFO]: Found user2: {"_id":"67edfc1684df802c506321fe","username":"Justatest4","email":"justatest4@gmail.com","password":"$2b$10$VwTC6Xsho/xWAkAhLIOzAuzCmkj8wXtvfrKfmNKso10OQHgITMdBi","createdAt":"2025-04-03T03:10:14.292Z","updatedAt":"2025-04-03T03:10:14.292Z","__v":0}
+2025-04-03 13:52:24 [INFO]: Found user: {"_id":"67edfc1684df802c506321fe","username":"Justatest4","email":"justatest4@gmail.com","password":"$2b$10$VwTC6Xsho/xWAkAhLIOzAuzCmkj8wXtvfrKfmNKso10OQHgITMdBi","createdAt":"2025-04-03T03:10:14.292Z","updatedAt":"2025-04-03T03:10:14.292Z","__v":0}
+2025-04-03 13:52:24 [INFO]: user_id found: "67edfc1684df802c506321fe"
+2025-04-03 13:52:24 [INFO]: Found user2: {"_id":"67edfc1684df802c506321fe","username":"Justatest4","email":"justatest4@gmail.com","password":"$2b$10$VwTC6Xsho/xWAkAhLIOzAuzCmkj8wXtvfrKfmNKso10OQHgITMdBi","createdAt":"2025-04-03T03:10:14.292Z","updatedAt":"2025-04-03T03:10:14.292Z","__v":0}
+2025-04-03 13:59:32 [INFO]: user_id found: "67edfc1684df802c506321fe"
+2025-04-03 13:59:32 [INFO]: Found user2: {"_id":"67edfc1684df802c506321fe","username":"Justatest4","email":"justatest4@gmail.com","password":"$2b$10$VwTC6Xsho/xWAkAhLIOzAuzCmkj8wXtvfrKfmNKso10OQHgITMdBi","createdAt":"2025-04-03T03:10:14.292Z","updatedAt":"2025-04-03T03:10:14.292Z","__v":0}

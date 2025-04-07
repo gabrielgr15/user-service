@@ -1,0 +1,63 @@
+2025-04-06 19:56:10 [INFO]: Server is running on http://localhost:5000
+2025-04-06 19:56:10 [INFO]: Connected to Redis successfully!
+2025-04-06 19:56:40 [ERROR]: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/ {"message":"Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/","errorLabelSet":{},"reason":{"type":"ReplicaSetNoPrimary","servers":{"cluster0-shard-00-01.z1ctu.mongodb.net:27017":{"address":"cluster0-shard-00-01.z1ctu.mongodb.net:27017","type":"Unknown","hosts":[],"passives":[],"arbiters":[],"tags":{},"minWireVersion":0,"maxWireVersion":0,"roundTripTime":-1,"minRoundTripTime":0,"lastUpdateTime":19249489,"lastWriteDate":0,"error":{"errorLabelSet":{},"beforeHandshake":false},"topologyVersion":null,"setName":null,"setVersion":null,"electionId":null,"logicalSessionTimeoutMinutes":null,"maxMessageSizeBytes":null,"maxWriteBatchSize":null,"maxBsonObjectSize":null,"primary":null,"me":null,"$clusterTime":null,"iscryptd":false},"cluster0-shard-00-02.z1ctu.mongodb.net:27017":{"address":"cluster0-shard-00-02.z1ctu.mongodb.net:27017","type":"Unknown","hosts":[],"passives":[],"arbiters":[],"tags":{},"minWireVersion":0,"maxWireVersion":0,"roundTripTime":-1,"minRoundTripTime":0,"lastUpdateTime":19249275,"lastWriteDate":0,"error":{"errorLabelSet":{},"beforeHandshake":false},"topologyVersion":null,"setName":null,"setVersion":null,"electionId":null,"logicalSessionTimeoutMinutes":null,"maxMessageSizeBytes":null,"maxWriteBatchSize":null,"maxBsonObjectSize":null,"primary":null,"me":null,"$clusterTime":null,"iscryptd":false},"cluster0-shard-00-00.z1ctu.mongodb.net:27017":{"address":"cluster0-shard-00-00.z1ctu.mongodb.net:27017","type":"Unknown","hosts":[],"passives":[],"arbiters":[],"tags":{},"minWireVersion":0,"maxWireVersion":0,"roundTripTime":-1,"minRoundTripTime":0,"lastUpdateTime":19248995,"lastWriteDate":0,"error":{"errorLabelSet":{},"beforeHandshake":false},"topologyVersion":null,"setName":null,"setVersion":null,"electionId":null,"logicalSessionTimeoutMinutes":null,"maxMessageSizeBytes":null,"maxWriteBatchSize":null,"maxBsonObjectSize":null,"primary":null,"me":null,"$clusterTime":null,"iscryptd":false}},"stale":false,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"setName":"atlas-adecil-shard-0","maxElectionId":null,"maxSetVersion":null,"commonWireVersion":0,"logicalSessionTimeoutMinutes":null}}
+MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/home/gabriel/projects/user-service/node_modules/mongoose/lib/connection.js:1165:11)
+    at NativeConnection.openUri (/home/gabriel/projects/user-service/node_modules/mongoose/lib/connection.js:1096:11)
+2025-04-06 19:56:55 [ERROR]: Unexpected error in login route {"originalError":{}}
+2025-04-06 19:58:17 [INFO]: Server is running on http://localhost:5000
+2025-04-06 19:58:17 [INFO]: Connected to Redis successfully!
+2025-04-06 19:58:18 [INFO]: MongoDB connected succesfully
+2025-04-06 20:06:36 [INFO]: Server is running on http://localhost:5000
+2025-04-06 20:06:36 [INFO]: Connected to Redis successfully!
+2025-04-06 20:06:38 [INFO]: MongoDB connected succesfully
+2025-04-06 20:08:07 [INFO]: Server is running on http://localhost:5000
+2025-04-06 20:08:07 [INFO]: Connected to Redis successfully!
+2025-04-06 20:08:08 [INFO]: MongoDB connected succesfully
+2025-04-06 20:12:22 [INFO]: Server is running on http://localhost:5000
+2025-04-06 20:12:22 [INFO]: Connected to Redis successfully!
+2025-04-06 20:12:24 [INFO]: MongoDB connected succesfully
+2025-04-06 20:12:46 [INFO]: Server is running on http://localhost:5000
+2025-04-06 20:12:46 [INFO]: Connected to Redis successfully!
+2025-04-06 20:12:47 [INFO]: MongoDB connected succesfully
+2025-04-06 20:12:50 [WARN]: Error caught by central handler: {"correlationId":"N/A","request":{"method":"POST","url":"/api/auth/login/","ip":"::1"},"error":{"message":"Invalid credentials","name":"AuthenticationError","status":401}}
+2025-04-06 20:17:28 [INFO]: Server is running on http://localhost:5000
+2025-04-06 20:17:28 [INFO]: Connected to Redis successfully!
+2025-04-06 20:17:29 [INFO]: MongoDB connected succesfully
+2025-04-06 20:17:32 [WARN]: Error caught by central handler: {"correlationId":"N/A","request":{"method":"POST","url":"/api/auth/login/","ip":"::1"},"error":{"message":"Invalid credentials","name":"AuthenticationError","status":401}}
+2025-04-06 20:18:41 [INFO]: Server is running on http://localhost:5000
+2025-04-06 20:18:41 [INFO]: Connected to Redis successfully!
+2025-04-06 20:18:42 [INFO]: MongoDB connected succesfully
+2025-04-06 20:18:45 [WARN]: Error caught by central handler: {"correlationId":"N/A","request":{"method":"POST","url":"/api/auth/login/","ip":"::1"},"error":{"message":"Invalid credentials","name":"AuthenticationError","status":401}}
+2025-04-06 20:18:45 [ERROR]: Unexpected error in login route {"originalError":{"name":"AuthenticationError","status":401}}
+2025-04-06 20:21:35 [INFO]: Server is running on http://localhost:5000
+2025-04-06 20:21:35 [INFO]: Connected to Redis successfully!
+2025-04-06 20:21:36 [INFO]: MongoDB connected succesfully
+2025-04-06 20:21:38 [WARN]: Error caught by central handler: {"correlationId":"N/A","request":{"method":"POST","url":"/api/auth/login/","ip":"::1"},"error":{"message":"Invalid credentials","name":"AuthenticationError","status":401}}
+2025-04-06 20:31:20 [INFO]: Server is running on http://localhost:5000
+2025-04-06 20:31:20 [INFO]: Connected to Redis successfully!
+2025-04-06 20:31:22 [INFO]: MongoDB connected succesfully
+2025-04-06 20:31:24 [WARN]: Error caught by central handler: {"correlationId":"N/A","request":{"method":"POST","url":"/api/auth/login/","ip":"::1"},"error":{"message":"Invalid credentials","name":"ValidationError","status":400}}
+2025-04-06 20:51:13 [INFO]: Server is running on http://localhost:5000
+2025-04-06 20:51:13 [INFO]: Connected to Redis successfully!
+2025-04-06 20:51:15 [INFO]: MongoDB connected succesfully
+2025-04-06 20:51:16 [WARN]: Error caught by central handler: {"correlationId":"N/A","request":{"method":"POST","url":"/api/auth/login/","ip":"::1"},"error":{"message":"Invalid credentials","name":"ValidationError","status":400}}
+2025-04-06 21:29:31 [INFO]: Server is running on http://localhost:5000
+2025-04-06 21:29:31 [INFO]: Connected to Redis successfully!
+2025-04-06 21:29:33 [INFO]: MongoDB connected succesfully
+2025-04-06 21:29:39 [WARN]: Error caught by central handler: {"correlationId":"N/A","request":{"method":"POST","url":"/api/auth/login/","ip":"::1"},"error":{"message":"Invalid credentials","name":"ValidationError","status":400}}
+2025-04-06 21:29:48 [WARN]: Error caught by central handler: {"correlationId":"N/A","request":{"method":"POST","url":"/api/auth/login/","ip":"::1"},"error":{"message":"Invalid credentials","name":"ValidationError","status":400}}
+2025-04-06 21:30:27 [WARN]: Error caught by central handler: {"correlationId":"N/A","request":{"method":"POST","url":"/api/auth/login/","ip":"::1"},"error":{"message":"Invalid credentials","name":"AuthenticationError","status":401}}
+2025-04-06 21:33:24 [INFO]: Server is running on http://localhost:5000
+2025-04-06 21:33:24 [INFO]: Connected to Redis successfully!
+2025-04-06 21:33:26 [INFO]: MongoDB connected succesfully
+2025-04-06 21:33:59 [INFO]: Server is running on http://localhost:5000
+2025-04-06 21:33:59 [INFO]: Connected to Redis successfully!
+2025-04-06 21:34:00 [INFO]: MongoDB connected succesfully
+2025-04-06 21:34:04 [INFO]: Server is running on http://localhost:5000
+2025-04-06 21:34:04 [INFO]: Connected to Redis successfully!
+2025-04-06 21:34:05 [INFO]: MongoDB connected succesfully
+2025-04-06 21:34:08 [WARN]: Error caught by central handler: {"correlationId":"N/A","request":{"method":"POST","url":"/api/auth/register/","ip":"::1"},"error":{"message":"Invalid input","name":"ValidationError","status":400}}
+2025-04-06 21:35:23 [WARN]: Error caught by central handler: {"correlationId":"N/A","request":{"method":"POST","url":"/api/auth/login/","ip":"::1"},"error":{"message":"Invalid credentials","name":"ValidationError","status":400}}
+2025-04-06 21:35:40 [WARN]: Error caught by central handler: {"correlationId":"N/A","request":{"method":"POST","url":"/api/auth/login/","ip":"::1"},"error":{"message":"Invalid credentials","name":"AuthenticationError","status":401}}
+2025-04-06 21:35:48 [WARN]: Error caught by central handler: {"correlationId":"N/A","request":{"method":"POST","url":"/api/auth/register/","ip":"::1"},"error":{"message":"Invalid input","name":"ValidationError","status":400}}

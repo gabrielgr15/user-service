@@ -212,3 +212,23 @@ Error: Invalid token1
     at verifyTokenAndCheckBlackList (/home/gabriel/projects/user-service/utils/tokenUtils.js:69:23)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
     at async module.exports (/home/gabriel/projects/user-service/middleware/auth.js:16:19)
+2025-04-02 21:27:28 [INFO]: Server is running on http://localhost:5000
+2025-04-02 21:27:28 [INFO]: Connected to Redis successfully!
+2025-04-02 21:27:29 [INFO]: MongoDB connected succesfully
+2025-04-02 22:09:33 [INFO]: Server is running on http://localhost:5000
+2025-04-02 22:09:33 [INFO]: Connected to Redis successfully!
+2025-04-02 22:09:34 [INFO]: MongoDB connected succesfully
+2025-04-02 22:12:19 [INFO]: Server is running on http://localhost:5000
+2025-04-02 22:12:19 [INFO]: Connected to Redis successfully!
+2025-04-02 22:12:20 [INFO]: MongoDB connected succesfully
+2025-04-02 22:14:14 [INFO]: Server is running on http://localhost:5000
+2025-04-02 22:14:14 [INFO]: Connected to Redis successfully!
+2025-04-02 22:14:15 [INFO]: MongoDB connected succesfully
+2025-04-02 22:14:18 [ERROR]: Error generating tokens:  user is not defined {}
+ReferenceError: user is not defined
+    at generateTokens (/home/gabriel/projects/user-service/utils/tokenUtils.js:35:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/gabriel/projects/user-service/routes/auth.js:87:42
+2025-04-02 22:16:15 [INFO]: Server is running on http://localhost:5000
+2025-04-02 22:16:15 [INFO]: Connected to Redis successfully!
+2025-04-02 22:16:17 [INFO]: MongoDB connected succesfully
