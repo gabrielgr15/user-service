@@ -18,8 +18,8 @@ router.post(
 		body('email', 'Please include a valid email').isEmail().normalizeEmail(),
 		body('password', 'Password must be 6+ characters').isLength({ min: 6 }),
 	],
-	async (req, res, next) => {
-		const errors = validationResult(req);
+	async (req, res, next) => {		
+		const errors = validationResult(req)
 		if (!errors.isEmpty()) {
 			return next(new ValidationError('Invalid input', errors.array()))
 		}
@@ -37,28 +37,27 @@ router.post(
 		} catch (error) {
 			if (error instanceof CustomError) {
 				next(error)
-			}else{
-				logger.error('Unexpected error in register route', { originalError: error })
+			} else {
 				next(new ServerError('An internal server error occurred', { cause: error }))
 			}
-			
+
 		}
 	}
 );
 
 
-router.post(
+router.post(	
 	'/login',
-	[
+	[		
 		body('email', 'The email is incorrect').notEmpty().isEmail().normalizeEmail(),
-		body('password', 'The password is incorrect').notEmpty(),
-	],
-	async (req, res, next) => {
+		body('password', 'The password is incorrect').notEmpty(),		
+	],	
+	async (req, res, next) => {		
 		const errors = validationResult(req)
 		if (!errors.isEmpty()) {
 			return next(new ValidationError('Invalid credentials', errors.array()))
-		}
-		const { email, password } = req.body;
+		}		
+		const { email, password } = req.body		
 		try {
 			const user = await User.findOne({ email }).select('+password')
 
@@ -75,7 +74,6 @@ router.post(
 			if (error instanceof CustomError) {
 				next(error)
 			} else {
-				logger.error('Unexpected error in login route', { originalError: error })
 				next(new ServerError('An internal server error occurred', { cause: error }))
 			}
 		}
@@ -105,29 +103,29 @@ router.post(
 
 			const userId = user._id
 			const { refreshToken, accessToken } = await generateTokens(userId)
-			return res.status(200).json({ refreshToken, accessToken })
+			return res.status(200).json({ accessToken, refreshToken })
 		} catch (error) {
 			if (error instanceof CustomError) {
 				next(error)
+			} else {
+				next(new ServerError('An internal server error occurred', { cause: error }))
 			}
-			logger.error('Unexpected error in refresh route', {originalError: error })
-			next(new ServerError('An internal server error occurred', {cause: error }))
-
 		}
 	})
 
 
 router.post(
-	'/logout',
-	auth,
+	'/logout',	
 	async (req, res, next) => {
-		try {
-			const tokenId = req.tokenId
-			const expirationTimestamp = req.tokenExpiry
+		const headers = req.headers
+		const tokenId = headers['x-token-id']
+		const expiryHeader = headers['x-token-expiry']
+		const expirationTimestamp = parseInt(expiryHeader, 10)
+		try {			
 			const { redisKey, value, ttlSeconds } = generateBlacklistData(tokenId, expirationTimestamp)
 
 			if (ttlSeconds <= 0) {
-				logger.warn('Logout requested for already expired token', { tokenId })
+				logger.warn('Logout requested for already expired token')
 				return res.status(204).send()
 			}
 			await redisClient.set(redisKey, value, { EX: ttlSeconds })
@@ -136,9 +134,9 @@ router.post(
 		} catch (error) {
 			if (error instanceof CustomError) {
 				next(error)
-			}
-			logger.error('Unexpected error in logout route', { originalError: error })
-			next(new ServerError('An internal server error occurred', { cause: error }))
+			}else{
+				next(new ServerError('An internal server error occurred', { cause: error }))
+			}			
 		}
 	}
 )

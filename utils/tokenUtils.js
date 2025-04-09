@@ -24,8 +24,9 @@ async function generateTokens(userId) {
     } catch (error) {
         if (error instanceof CustomError) {
             throw error
-        }
-        throw new ServerError('An internal server error occurred', {cause: error})
+        }else{
+            throw new ServerError('An internal server error occurred', {cause: error})
+        }        
     }
 }
 
@@ -36,30 +37,27 @@ async function verifyTokenAndCheckBlacklist(token) {
         throw new ServerError('invalid argument for token verification')
     }
     try {
-        const decoded = jwt.verify(token, config.get('jwtSecret'));
-        // Check jti presence since blacklist relies on it, data integrity matters.
+        const decoded = jwt.verify(token, config.get('jwtSecret'))        
         if (!decoded.jti) {
-            logger.warn('Token missing jti', { token });
-            throw new AuthError('Invalid token structure');
-        }
-        // Could split blacklist check for modularity, but kept cohesive here.
+            logger.warn('Token missing jti', { token })
+            throw new AuthError('Invalid token structure')
+        }        
         const isBlacklisted = await redisClient.exists(`blacklist:${decoded.jti}`);
         if (isBlacklisted) throw new AuthError('Token is blacklisted');
         return decoded;
-    } catch (error) {
-        // Map JWT failures to AuthError for semantic clarity.
+    } catch (error) {       
         if (error instanceof jwt.TokenExpiredError || error instanceof jwt.JsonWebTokenError) {
-            throw new AuthError('Invalid token');
-        }
-        if (error instanceof CustomError) {
+            throw new AuthError('Invalid token', {cause: error});
+        }else if (error instanceof CustomError){
             throw error
-        }        
-        throw new ServerError('An internal server error occurred', {cause: error}) 
+        } else{
+            throw new ServerError('An internal server error occurred', {cause: error}) 
+        }       
     }
 }
 
 function generateBlacklistData(tokenId, expirationTimestamp) {
-    if(!tokenId || typeof expirationTimestamp !== 'number'){
+    if(!tokenId || typeof expirationTimestamp !== 'number' || isNaN(expirationTimestamp)){
         logger.error('Invalid arguments passed to generateBlacklistData', {tokenId, expirationTimestamp})
         throw new ServerError('Invalid arguments for blacklist data generation')
     }

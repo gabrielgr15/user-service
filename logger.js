@@ -14,15 +14,15 @@ const fileRotateTransport = new winston.transports.DailyRotateFile({
     zippedArchive: true,
     maxSize: '20m',
     maxFiles: '7d', 
-    level: 'info'
+    level: 'debug'
 });
 
 const consoleTransport = new winston.transports.Console({
-    level: 'info',
+    level: 'debug',
 });
 
 const logger = winston.createLogger({
-    level: 'info',
+    level: 'debug',
     format: winston.format.combine(        
         winston.format.timestamp({
             format: 'YYYY-MM-DD HH:mm:ss'

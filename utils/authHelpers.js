@@ -6,7 +6,6 @@ const { ServerError } = require('../errors')
 const crypto = require('crypto')
 const RefreshToken = require('../models/RefreshToken')
 
-
 const signPromise = util.promisify(jwt.sign)
 
 
