@@ -5,6 +5,7 @@ const redisClient = require('../redis/redisClient')
 const logger = require('../logger')
 const { generateAccessToken, generateRefreshToken } = require('./authHelpers')
 const { ServerError, CustomError, AuthError } = require('../errors')
+const {redisCheckBreaker} = require('./circuitBreaker')
 
 async function generateTokens(userId) {
     if (!userId) {
@@ -31,41 +32,14 @@ async function generateTokens(userId) {
 }
 
 
-async function verifyTokenAndCheckBlacklist(token) {
-    if(!token) {
-        logger.error('Invalid arguments passed to verifyTokenAndCheckBlacklist', {token})
-        throw new ServerError('invalid argument for token verification')
-    }
-    try {
-        const decoded = jwt.verify(token, config.get('jwtSecret'))        
-        if (!decoded.jti) {
-            logger.warn('Token missing jti', { token })
-            throw new AuthError('Invalid token structure')
-        }        
-        const isBlacklisted = await redisClient.exists(`blacklist:${decoded.jti}`);
-        if (isBlacklisted) throw new AuthError('Token is blacklisted');
-        return decoded;
-    } catch (error) {       
-        if (error instanceof jwt.TokenExpiredError || error instanceof jwt.JsonWebTokenError) {
-            throw new AuthError('Invalid token', {cause: error});
-        }else if (error instanceof CustomError){
-            throw error
-        } else{
-            throw new ServerError('An internal server error occurred', {cause: error}) 
-        }       
-    }
-}
-
-function generateBlacklistData(tokenId, expirationTimestamp) {
-    if(!tokenId || typeof expirationTimestamp !== 'number' || isNaN(expirationTimestamp)){
-        logger.error('Invalid arguments passed to generateBlacklistData', {tokenId, expirationTimestamp})
+function generateBlacklistData(expirationTimestamp) {
+    if(typeof expirationTimestamp !== 'number' || isNaN(expirationTimestamp)){
+        logger.error('Invalid arguments passed to generateBlacklistData', {expirationTimestamp})
         throw new ServerError('Invalid arguments for blacklist data generation')
     }
     const nowInSeconds = Math.floor(Date.now() / 1000)
-    const ttlSeconds = expirationTimestamp - nowInSeconds
-    const redisKey = `blacklist:${tokenId}`
-    const value = 1
-    return { redisKey, value, ttlSeconds }
+    const ttlSeconds = expirationTimestamp - nowInSeconds   
+    return {ttlSeconds}
 }
 
 module.exports = { verifyTokenAndCheckBlacklist, generateTokens, generateBlacklistData }

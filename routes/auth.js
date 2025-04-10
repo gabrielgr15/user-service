@@ -8,6 +8,7 @@ const auth = require('../middleware/auth')
 const redisClient = require('../redis/redisClient')
 const logger = require('../logger')
 const { AuthError, ServerError, ValidationError, ConflictError, CustomError } = require('../errors')
+const {redisAddBreaker} = require('../utils/circuitBreaker') 
 
 const router = express.Router();
 
@@ -122,16 +123,17 @@ router.post(
 		const expiryHeader = headers['x-token-expiry']
 		const expirationTimestamp = parseInt(expiryHeader, 10)
 		try {			
-			const { redisKey, value, ttlSeconds } = generateBlacklistData(tokenId, expirationTimestamp)
-
+			const {ttlSeconds} = generateBlacklistData(expirationTimestamp)
 			if (ttlSeconds <= 0) {
 				logger.warn('Logout requested for already expired token')
 				return res.status(204).send()
 			}
-			await redisClient.set(redisKey, value, { EX: ttlSeconds })
+			const blacklistResult = await redisAddBreaker.fire(tokenId, ttlSeconds)
+			logger.info(`[${redisAddBreaker.name}] fire() completed for logout.
+				 			Result: ${blacklistResult}`)
 
 			return res.status(204).send()
-		} catch (error) {
+		} catch (error) {			
 			if (error instanceof CustomError) {
 				next(error)
 			}else{
